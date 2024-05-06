@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="Main"-->
+<!--            type="" />-->
+<!--    </data>-->
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#191919"
+        tools:context=".view.activity.MainActivity">
+        <FrameLayout
+            android:id="@+id/frg_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/background_nav"
+            android:layout_alignParentTop="true"/>
+        <LinearLayout
+            android:id="@+id/background_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:background="@drawable/background_bottom_nav"
+                app:itemTextColor="@color/color_items_bottom_nav"
+                app:itemIconTint="@color/color_items_bottom_nav"
+                android:layout_margin="10dp"
+                android:alpha="0.8"
+                android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+                style="@style/Widget.MaterialComponents.BottomNavigationView"
+                app:menu="@menu/nav_bottom">
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

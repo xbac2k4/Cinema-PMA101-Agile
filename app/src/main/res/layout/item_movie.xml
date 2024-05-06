@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardElevation="10dp"
+    android:elevation="10dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
+    android:layout_marginTop="10dp">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <com.makeramen.roundedimageview.RoundedImageView
+           android:id="@+id/item_movie"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:adjustViewBounds="true"
+           android:scaleType="centerCrop">
+       </com.makeramen.roundedimageview.RoundedImageView>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:orientation="vertical"
+           android:padding="10dp"
+           android:background="#4D000000">
+           <TextView
+               android:id="@+id/tv_name_movie"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="18sp"
+               android:textStyle="bold"
+               android:layout_marginVertical="10dp"
+               android:textColor="#FF0000"
+               android:text="Tên phim"/>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:id="@+id/tv_duration"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="12sp"
+                   android:textStyle="italic"
+                   android:textColor="#BEFFFFFF"
+                   android:layout_alignParentLeft="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="10dp"
+                   android:text="Giờ chiếu"/>
+               <TextView
+                   android:id="@+id/tv_show_date"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="12sp"
+                   android:textStyle="italic"
+                   android:textColor="#BEFFFFFF"
+                   android:layout_toRightOf="@id/tv_duration"
+                   android:layout_centerVertical="true"
+                   android:text="Ngày chiếu"/>
+               <TextView
+                   android:id="@+id/tv_evaluate"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="14sp"
+                   android:textStyle="bold"
+                   android:textColor="#FFFFFF"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:text="Đánh giá"/>
+           </RelativeLayout>
+       </LinearLayout>
+   </RelativeLayout>
+</androidx.cardview.widget.CardView>

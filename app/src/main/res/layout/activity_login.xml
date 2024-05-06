@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.LoginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="200dp"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your username"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:errorEnabled="true"
+            app:errorTextColor="#FF0000"
+            app:startIconDrawable="@drawable/ic_profile_nav_24"
+            app:hintAnimationEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your password"
+            app:errorEnabled="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:startIconDrawable="@drawable/ic_lock_24"
+            app:endIconMode="password_toggle"
+            app:hintAnimationEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/bgr_btn_login"
+            android:text="LOGIN"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

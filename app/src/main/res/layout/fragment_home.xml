@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="Categor"-->
+<!--            type="com.example.cinemamobilefe.viewmodel.CategoryViewModel" />-->
+<!--    </data>-->
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/mainColor"
+        android:orientation="vertical"
+        tools:context=".view.fragment.FragmentHome">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp">
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                app:iss_auto_cycle="true"
+                app:iss_period="1000"
+                app:iss_delay="1000"
+                app:iss_text_align="CENTER"/>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFB43A"
+            android:text="Category"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvTheLoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FF0000"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_category"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp2_movie"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:paddingHorizontal="70dp"
+            android:background="#00E8CB00"/>
+    </LinearLayout>
+</layout>
