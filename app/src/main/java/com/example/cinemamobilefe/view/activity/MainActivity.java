@@ -1,5 +1,6 @@
 package com.example.cinemamobilefe.view.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
+    String auth = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        auth = getIntent().getStringExtra("auth");
         replaceFrg(new FragmentHome());
 
         binding.navBottom.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -47,9 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.it_home) {
                     replaceFrg(new FragmentHome());
                 } else if (menuItem.getItemId() == R.id.it_tickets) {
-                    replaceFrg(new FragmentTickets());
+                    if (auth != null) {
+                        replaceFrg(new FragmentTickets());
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                 } else if (menuItem.getItemId() == R.id.it_profile) {
-                    replaceFrg(new FragmentProfile());
+                    if (auth != null) {
+                        replaceFrg(new FragmentProfile());
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                 }
                 return true;
             }

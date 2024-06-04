@@ -42,7 +42,7 @@ public class MovieRepository {
                 } else {
                     mutableLiveData.postValue(null);
                     Log.d(TAG, "data2: " + response.body());
-                    Toast.makeText(context, "No2", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "No2", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -50,7 +50,7 @@ public class MovieRepository {
             public void onFailure(Call<MovieResponse<ArrayList<MovieModel>>> call, Throwable t) {
                 mutableLiveData.postValue(null);
                 Log.d(TAG, "onFailure: " + t.getMessage());
-                Toast.makeText(context, "No1", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "No1", Toast.LENGTH_SHORT).show();
             }
         });
 

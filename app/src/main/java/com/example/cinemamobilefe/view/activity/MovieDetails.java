@@ -16,7 +16,7 @@ import com.example.cinemamobilefe.databinding.ActivityMovieDetailsBinding;
 
 public class MovieDetails extends AppCompatActivity {
     ActivityMovieDetailsBinding binding;
-    String id, image, name, show_date, duration, evaluate, description, directors, name_category;
+    String id, image, name, start_date, duration, description, directors, name_category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,26 +57,25 @@ public class MovieDetails extends AppCompatActivity {
         id = bundle.getString("id");
         image = bundle.getString("image");
         name = bundle.getString("name");
-        show_date = bundle.getString("date");
+        start_date = bundle.getString("start_date");
         duration = bundle.getString("duration");
-        evaluate = bundle.getString("evaluate");
         description = bundle.getString("description");
         directors = bundle.getString("directors");
         name_category = bundle.getString("name_category");
     }
     private void getTextDisplayInView() {
+        String newUrl = image.replace("localhost", "10.0.2.2");
         Glide.with(this)
-                .load(image)
+                .load(newUrl)
                 .centerCrop()
                 .into(binding.imgBanner);
         Glide.with(this)
-                .load(image)
+                .load(newUrl)
                 .centerCrop()
                 .into(binding.imgImage);
         binding.tvNameMovie.setText(name);
-        binding.tvShowDate.setText(show_date);
-        binding.tvDuration.setText(duration);
-        binding.tvEvaluate.setText(evaluate);
+        binding.tvShowDate.setText(start_date);
+        binding.tvDuration.setText(duration + " phút");
         binding.tvDirectors.setText(directors);
         binding.tvDescription.setText(description);
         binding.tvNameCategory.setText(name_category);

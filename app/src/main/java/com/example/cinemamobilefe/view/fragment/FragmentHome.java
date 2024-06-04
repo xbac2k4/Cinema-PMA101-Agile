@@ -3,6 +3,7 @@ package com.example.cinemamobilefe.view.fragment;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.cinemamobilefe.service.onClick.OnClickSelectCategory;
@@ -39,6 +45,7 @@ public class FragmentHome extends Fragment {
     FragmentHomeBinding binding;
     ArrayList<SlideModel> imageList = new ArrayList<>();
     MovieApdapter apdapterMovie;
+    ArrayList<MovieModel> listGetImage = new ArrayList<>();
     CategoryAdapter adapterCategory;
     public FragmentHome() {
         // Required empty public constructor
@@ -54,9 +61,8 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         ImageSlider();
-        ViewModelCategory();
+//        ViewModelCategory();
         ViewModelMovie();
     }
 
@@ -77,9 +83,8 @@ public class FragmentHome extends Fragment {
                 bundle.putString("id", movieModel.get_id());
                 bundle.putString("image", movieModel.getImage());
                 bundle.putString("name", movieModel.getName());
-                bundle.putString("date", movieModel.getShow_date());
+                bundle.putString("start_date", movieModel.getStart_date());
                 bundle.putString("duration", movieModel.getDuration());
-                bundle.putString("evaluate", movieModel.getEvaluate());
                 bundle.putString("description", movieModel.getDescription());
                 bundle.putString("directors", movieModel.getDirectors());
                 bundle.putString("name_category", movieModel.getId_category().getName());
@@ -103,32 +108,71 @@ public class FragmentHome extends Fragment {
                 page.setScaleY(0.85f + r * 0.14f);
             }
         });
+        // Thêm OnPageChangeCallback để lấy vị trí trang hiện tại
+        binding.vp2Movie.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+
+//                Toast.makeText(getContext(), "index: " + position, Toast.LENGTH_SHORT).show();
+
+                // Kiểm tra nếu chỉ số hợp lệ trong danh sách
+                if (position >= 0 && position < listGetImage.size()) {
+                    String imageUrl = listGetImage.get(position).getImage();
+                    String newUrl = imageUrl.replace("localhost", "10.0.2.2");
+
+//                    Toast.makeText(getContext(), "- Image: " + imageUrl + "\n" + "- Index: " + position, Toast.LENGTH_SHORT).show();
+
+                    Glide.with(getContext())
+                            .load(newUrl)
+                            .transform(new CenterCrop())
+                            .into(binding.imgBgrHome);
+//                            .into(new CustomTarget<Drawable>() {
+//                                @Override
+//                                public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
+//                                    binding.bgrHome.setBackground(resource);
+//                                }
+//
+//                                @Override
+//                                public void onLoadCleared(Drawable placeholder) {
+//                                    // Handle placeholder if needed
+//                                }
+//                                @Override
+//                                public void onLoadFailed(@Nullable Drawable errorDrawable) {
+//                                    super.onLoadFailed(errorDrawable);
+////                                    Toast.makeText(getContext(), "Failed to load image", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+                }
+            }
+        });
         binding.vp2Movie.setPageTransformer(transformer);
     }
 
-    private void ViewModelCategory() {
-        CategoryViewModel categoryViewModel = new CategoryViewModel(getContext());
-        binding.rcvTheLoai.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
-        categoryViewModel.getLiveData().observe(getActivity(), listCategory -> {
-            if (listCategory != null && listCategory.getData() != null) {
-//                Toast.makeText(getContext(), "data: " + listCategory.getData() , Toast.LENGTH_SHORT).show();
-                adapterCategory = new CategoryAdapter(listCategory.getData());
-                binding.rcvTheLoai.setAdapter(adapterCategory);
-                adapterCategory.setOnClickListen(new OnClickSelectCategory() {
-                    @Override
-                    public void selectItem(CategoryModel categoryModel) {
-
-                    }
-                });
-            }
-        });
-    }
+//    private void ViewModelCategory() {
+//        CategoryViewModel categoryViewModel = new CategoryViewModel(getContext());
+//        binding.rcvTheLoai.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+//        categoryViewModel.getLiveData().observe(getActivity(), listCategory -> {
+//            if (listCategory != null && listCategory.getData() != null) {
+////                Toast.makeText(getContext(), "data: " + listCategory.getData() , Toast.LENGTH_SHORT).show();
+//                adapterCategory = new CategoryAdapter(listCategory.getData());
+//                binding.rcvTheLoai.setAdapter(adapterCategory);
+//                adapterCategory.setOnClickListen(new OnClickSelectCategory() {
+//                    @Override
+//                    public void selectItem(CategoryModel categoryModel) {
+//
+//                    }
+//                });
+//            }
+//        });
+//    }
     private void ViewModelMovie() {
         MovieViewModel movieViewModel = new MovieViewModel(getContext());
         movieViewModel.getLiveData().observe(getActivity(), listMovie -> {
             if (listMovie != null && listMovie.getData() != null) {
 //                Toast.makeText(getContext(), "OKOK", Toast.LENGTH_SHORT).show();
                 SliderMovie(listMovie.getData());
+                listGetImage = listMovie.getData();
                 Log.d(TAG, "ViewModelMovie: " + listMovie.getMessenger());
                 Log.d(TAG, "ViewModelMovie: " + listMovie.getData());
             }

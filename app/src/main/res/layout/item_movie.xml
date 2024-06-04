@@ -1,74 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardElevation="10dp"
-    android:elevation="10dp"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="10dp"
-    android:layout_marginTop="10dp">
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-       <com.makeramen.roundedimageview.RoundedImageView
-           android:id="@+id/item_movie"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:adjustViewBounds="true"
-           android:scaleType="centerCrop">
-       </com.makeramen.roundedimageview.RoundedImageView>
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_alignParentBottom="true"
-           android:orientation="vertical"
-           android:padding="10dp"
-           android:background="#4D000000">
-           <TextView
-               android:id="@+id/tv_name_movie"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:textSize="18sp"
-               android:textStyle="bold"
-               android:layout_marginVertical="10dp"
-               android:textColor="#FF0000"
-               android:text="Tên phim"/>
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <TextView
-                   android:id="@+id/tv_duration"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="12sp"
-                   android:textStyle="italic"
-                   android:textColor="#BEFFFFFF"
-                   android:layout_alignParentLeft="true"
-                   android:layout_centerVertical="true"
-                   android:layout_marginRight="10dp"
-                   android:text="Giờ chiếu"/>
-               <TextView
-                   android:id="@+id/tv_show_date"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="12sp"
-                   android:textStyle="italic"
-                   android:textColor="#BEFFFFFF"
-                   android:layout_toRightOf="@id/tv_duration"
-                   android:layout_centerVertical="true"
-                   android:text="Ngày chiếu"/>
-               <TextView
-                   android:id="@+id/tv_evaluate"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="14sp"
-                   android:textStyle="bold"
-                   android:textColor="#FFFFFF"
-                   android:layout_alignParentRight="true"
-                   android:layout_centerVertical="true"
-                   android:text="Đánh giá"/>
-           </RelativeLayout>
-       </LinearLayout>
-   </RelativeLayout>
-</androidx.cardview.widget.CardView>
+    android:backgroundTint="#00000000"
+    android:background="#00000000"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="#DD636C"
+        android:background="@drawable/bgr_ticket_2">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/item_movie"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="10dp">
+        </com.makeramen.roundedimageview.RoundedImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_movie"
+            android:layout_above="@+id/bgr_button"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_name_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="5dp"
+                android:text="Tên phim"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Thời lượng"
+                    android:drawableLeft="@drawable/ic_clock_16"
+                    android:drawablePadding="5dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Ngày khởi chiếu"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+                <!--               <TextView-->
+                <!--                   android:id="@+id/tv_evaluate"-->
+                <!--                   android:layout_width="wrap_content"-->
+                <!--                   android:layout_height="wrap_content"-->
+                <!--                   android:textSize="14sp"-->
+                <!--                   android:textStyle="bold"-->
+                <!--                   android:textColor="#FFFFFF"-->
+                <!--                   android:layout_alignParentRight="true"-->
+                <!--                   android:layout_centerVertical="true"-->
+                <!--                   android:text="Đánh giá"/>-->
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bgr_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="17dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/dashed_line" />
+            <Button
+                android:id="@+id/btn_book_now"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BOOK NOW"
+                android:textStyle="bold"
+                android:backgroundTint="#25FFFFFF"
+                android:alpha="1"
+                android:paddingVertical="15dp"
+                android:layout_marginHorizontal="30dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

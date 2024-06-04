@@ -16,7 +16,8 @@
         <FrameLayout
             android:id="@+id/frg_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_above="@+id/background_nav"
             android:layout_alignParentTop="true"/>
         <LinearLayout
@@ -33,7 +34,7 @@
                 app:itemTextColor="@color/color_items_bottom_nav"
                 app:itemIconTint="@color/color_items_bottom_nav"
                 android:layout_margin="10dp"
-                android:alpha="0.8"
+                android:alpha="1"
                 android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
                 style="@style/Widget.MaterialComponents.BottomNavigationView"
                 app:menu="@menu/nav_bottom">
