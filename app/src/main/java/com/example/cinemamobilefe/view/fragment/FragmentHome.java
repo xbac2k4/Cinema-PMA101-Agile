@@ -127,22 +127,6 @@ public class FragmentHome extends Fragment {
                             .load(newUrl)
                             .transform(new CenterCrop())
                             .into(binding.imgBgrHome);
-//                            .into(new CustomTarget<Drawable>() {
-//                                @Override
-//                                public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
-//                                    binding.bgrHome.setBackground(resource);
-//                                }
-//
-//                                @Override
-//                                public void onLoadCleared(Drawable placeholder) {
-//                                    // Handle placeholder if needed
-//                                }
-//                                @Override
-//                                public void onLoadFailed(@Nullable Drawable errorDrawable) {
-//                                    super.onLoadFailed(errorDrawable);
-////                                    Toast.makeText(getContext(), "Failed to load image", Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
                 }
             }
         });

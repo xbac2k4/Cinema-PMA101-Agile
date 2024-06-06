@@ -1,5 +1,6 @@
 package com.example.cinemamobilefe.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -50,7 +51,23 @@ public class MovieDetails extends AppCompatActivity {
         });
         getIntentMovie();
         getTextDisplayInView();
-
+        binding.btnBooknow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MovieDetails.this, BookingActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                bundle.putString("image", image);
+                bundle.putString("name", name);
+                bundle.putString("start_date", start_date);
+                bundle.putString("duration", duration);
+                bundle.putString("description", description);
+                bundle.putString("directors", directors);
+                bundle.putString("name_category", name_category);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
     private void getIntentMovie() {
         Bundle bundle = getIntent().getExtras();

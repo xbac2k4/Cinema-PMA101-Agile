@@ -37,11 +37,11 @@ public class MovieRepository {
                     if (response.body().getStatus() == 200) {
 //                        Toast.makeText(context, "okOKO", Toast.LENGTH_SHORT).show();
                         mutableLiveData.postValue(response.body());
-                        Log.d(TAG, "data1: " + response.body());
+//                        Log.d(TAG, "data1: " + response.body());
                     }
                 } else {
                     mutableLiveData.postValue(null);
-                    Log.d(TAG, "data2: " + response.body());
+//                    Log.d(TAG, "data2: " + response.body());
 //                    Toast.makeText(context, "No2", Toast.LENGTH_SHORT).show();
                 }
             }
