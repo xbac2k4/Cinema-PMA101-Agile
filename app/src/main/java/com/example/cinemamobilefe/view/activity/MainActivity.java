@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.cinemamobilefe.Data_local.DataLocalManager;
 import com.example.cinemamobilefe.R;
 import com.example.cinemamobilefe.databinding.ActivityMainBinding;
 import com.example.cinemamobilefe.view.fragment.FragmentHome;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         auth = getIntent().getStringExtra("auth");
         replaceFrg(new FragmentHome());
+
+        DataLocalManager.init(getApplicationContext());
 
         binding.navBottom.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

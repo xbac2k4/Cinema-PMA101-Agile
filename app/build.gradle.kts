@@ -59,5 +59,7 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
     // Other dependencies...
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    // animation
+    implementation("com.airbnb.android:lottie:5.2.0")
 
 }
