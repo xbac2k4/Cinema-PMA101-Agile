@@ -1,5 +1,6 @@
 package com.example.cinemamobilefe.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,7 +17,7 @@ import com.example.cinemamobilefe.databinding.ActivityMovieDetailsBinding;
 
 public class MovieDetails extends AppCompatActivity {
     ActivityMovieDetailsBinding binding;
-    String id, image, name, show_date, duration, evaluate, description, directors, name_category;
+    String id, image, name, start_date, duration, description, directors, name_category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,33 +51,48 @@ public class MovieDetails extends AppCompatActivity {
         });
         getIntentMovie();
         getTextDisplayInView();
-
+        binding.btnBooknow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MovieDetails.this, BookingActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                bundle.putString("image", image);
+                bundle.putString("name", name);
+                bundle.putString("start_date", start_date);
+                bundle.putString("duration", duration);
+                bundle.putString("description", description);
+                bundle.putString("directors", directors);
+                bundle.putString("name_category", name_category);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
     private void getIntentMovie() {
         Bundle bundle = getIntent().getExtras();
         id = bundle.getString("id");
         image = bundle.getString("image");
         name = bundle.getString("name");
-        show_date = bundle.getString("date");
+        start_date = bundle.getString("start_date");
         duration = bundle.getString("duration");
-        evaluate = bundle.getString("evaluate");
         description = bundle.getString("description");
         directors = bundle.getString("directors");
         name_category = bundle.getString("name_category");
     }
     private void getTextDisplayInView() {
+        String newUrl = image.replace("localhost", "10.0.2.2");
         Glide.with(this)
-                .load(image)
+                .load(newUrl)
                 .centerCrop()
                 .into(binding.imgBanner);
         Glide.with(this)
-                .load(image)
+                .load(newUrl)
                 .centerCrop()
                 .into(binding.imgImage);
         binding.tvNameMovie.setText(name);
-        binding.tvShowDate.setText(show_date);
-        binding.tvDuration.setText(duration);
-        binding.tvEvaluate.setText(evaluate);
+        binding.tvShowDate.setText(start_date);
+        binding.tvDuration.setText(duration + " phút");
         binding.tvDirectors.setText(directors);
         binding.tvDescription.setText(description);
         binding.tvNameCategory.setText(name_category);

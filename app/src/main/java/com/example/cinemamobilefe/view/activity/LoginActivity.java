@@ -34,9 +34,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("auth", "nxb");
                 startActivity(intent);
                 finish();
             }
         });
     }
+
 }

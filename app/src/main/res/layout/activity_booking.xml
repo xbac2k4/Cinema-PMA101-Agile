@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--        <data>-->
+<!--            <variable-->
+<!--                name="Main"-->
+<!--                type="" />-->
+<!--        </data>-->
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".view.activity.BookingActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/black"
+            app:title="Movie Name"
+            android:background="#00000000"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:backgroundTint="@color/black"
+            android:background="@color/black">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FF0000"
+                android:paddingVertical="5dp"
+                tools:itemCount="7"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_date"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <TextView
+                android:id="@+id/tv_dd_mm_yyyy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Thứ 4, 5 Tháng 6, 2024"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+            <TextView
+                android:id="@+id/tv_no_screenings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="Chưa có suất chiếu trong ngày"/>
+            <LinearLayout
+                android:id="@+id/layout_ten_rap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:paddingTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B2BA2F2F"
+                    android:textStyle="bold"
+                    android:text="CINEMA"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B2000000"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:text="Nhóm 5 Agile"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_ten_rap"
+                android:background="#00FF0000"
+                android:paddingVertical="5dp"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_time"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

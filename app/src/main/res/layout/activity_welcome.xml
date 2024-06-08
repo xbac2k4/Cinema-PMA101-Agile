@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.WelcomeActivity">
+    <ImageView
+        android:id="@+id/imv_logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo_welcome"/>
+    <TextView
+        android:id="@+id/tv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingLeft="20dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:text="CINEMA"/>
+    <TextView
+        android:id="@+id/tv_logo_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/tv_logo"
+        android:paddingTop="20dp"
+        android:alpha="0"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:text="Welcome to Cinema"/>
+</RelativeLayout>

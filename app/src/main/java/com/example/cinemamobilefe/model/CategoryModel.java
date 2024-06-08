@@ -1,13 +1,12 @@
 package com.example.cinemamobilefe.model;
 
 public class CategoryModel {
-    private String _id, image, name;
+    private String _id, name;
 
     public CategoryModel() {
     }
 
-    public CategoryModel(String image, String name) {
-        this.image = image;
+    public CategoryModel(String name) {
         this.name = name;
     }
 
@@ -17,14 +16,6 @@ public class CategoryModel {
 
     public void set_id(String _id) {
         this._id = _id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getName() {

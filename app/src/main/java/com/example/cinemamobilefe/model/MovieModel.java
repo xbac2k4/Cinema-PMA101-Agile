@@ -11,7 +11,7 @@ public class MovieModel {
 //    description: { type: String, required: true },
 //    directors: { type: String, required: true },
 //    id_category: { type: Scheme.Types.ObjectId, ref: 'category' },
-    String _id, image, name, show_date, duration, evaluate, description, directors;
+    String _id, image, name, start_date, end_date, duration, description, directors;
     @SerializedName("id_category")
     CategoryModel id_category;
 
@@ -46,12 +46,20 @@ public class MovieModel {
         this.name = name;
     }
 
-    public String getShow_date() {
-        return show_date;
+    public String getStart_date() {
+        return start_date;
     }
 
-    public void setShow_date(String show_date) {
-        this.show_date = show_date;
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 
     public String getDuration() {
@@ -60,14 +68,6 @@ public class MovieModel {
 
     public void setDuration(String duration) {
         this.duration = duration;
-    }
-
-    public String getEvaluate() {
-        return evaluate;
-    }
-
-    public void setEvaluate(String evaluate) {
-        this.evaluate = evaluate;
     }
 
     public String getDescription() {
