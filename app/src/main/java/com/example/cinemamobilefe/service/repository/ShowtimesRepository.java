@@ -39,6 +39,35 @@ public class ShowtimesRepository {
                     if (response.body().getStatus() == 200) {
 //                        Toast.makeText(context, "okOKO", Toast.LENGTH_SHORT).show();
                         mutableLiveData.postValue(response.body());
+//                        Log.d(TAG, "datashowtimes: " + response.body());
+//                        Log.d(TAG, "RepositoryeDataShowtimes: " + new Gson().toJson(response.body()));
+                    }
+                } else {
+                    mutableLiveData.postValue(null);
+//                    Log.d(TAG, "datashowtime2: " + response.body());
+//                    Toast.makeText(context, "No2", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShowtimesResponse<ArrayList<ShowtimesModel>>> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return mutableLiveData;
+    }
+    public LiveData<ShowtimesResponse<ArrayList<ShowtimesModel>>> getShowtimesByMovie(String movie) {
+        final MutableLiveData<ShowtimesResponse<ArrayList<ShowtimesModel>>> mutableLiveData = new MutableLiveData<>();
+
+        ShowtimesAPI showtimesAPI = RetrofitInstance.getRetrofitInstance().create(ShowtimesAPI.class);
+        showtimesAPI.getShowtimesByMovie(movie).enqueue(new Callback<ShowtimesResponse<ArrayList<ShowtimesModel>>>() {
+            @Override
+            public void onResponse(Call<ShowtimesResponse<ArrayList<ShowtimesModel>>> call, Response<ShowtimesResponse<ArrayList<ShowtimesModel>>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 200) {
+//                        Toast.makeText(context, "okOKO", Toast.LENGTH_SHORT).show();
+                        mutableLiveData.postValue(response.body());
                         Log.d(TAG, "datashowtimes: " + response.body());
 //                        Log.d(TAG, "RepositoryeDataShowtimes: " + new Gson().toJson(response.body()));
                     }

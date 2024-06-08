@@ -3,13 +3,10 @@ package com.example.cinemamobilefe.model;
 import com.google.gson.annotations.SerializedName;
 
 public class SeatModel {
-    private String _id;
-    private String seatNumber;
-    private String rowNumber;
-    private String seatType;
-    private String status;
-    @SerializedName("id_showtimes")
-    private String showtimeId;
+    String _id, seatNumber, rowName;
+    @SerializedName("id_seatType")
+    SeatType seatType;
+
     public SeatModel() {
     }
 
@@ -29,35 +26,19 @@ public class SeatModel {
         this.seatNumber = seatNumber;
     }
 
-    public String getRowNumber() {
-        return rowNumber;
+    public String getRowName() {
+        return rowName;
     }
 
-    public void setRowNumber(String rowNumber) {
-        this.rowNumber = rowNumber;
+    public void setRowName(String rowName) {
+        this.rowName = rowName;
     }
 
-    public String getSeatType() {
+    public SeatType getSeatType() {
         return seatType;
     }
 
-    public void setSeatType(String seatType) {
+    public void setSeatType(SeatType seatType) {
         this.seatType = seatType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getShowtimeId() {
-        return showtimeId;
-    }
-
-    public void setShowtimeId(String showtimeId) {
-        this.showtimeId = showtimeId;
     }
 }

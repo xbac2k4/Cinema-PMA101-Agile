@@ -11,10 +11,15 @@ import java.util.ArrayList;
 
 public class ShowtimesViewModel {
     private LiveData<ShowtimesResponse<ArrayList<ShowtimesModel>>> liveData;
+    private LiveData<ShowtimesResponse<ArrayList<ShowtimesModel>>> liveShowtimesByMovie;
     private ShowtimesRepository showtimesRepository;
     public LiveData<ShowtimesResponse<ArrayList<ShowtimesModel>>> getLiveData() {
         return liveData;
     }
+    public LiveData<ShowtimesResponse<ArrayList<ShowtimesModel>>> getLiveShowtimesByMovie() {
+        return liveShowtimesByMovie;
+    }
+
     public ShowtimesViewModel(Context context, String date) {
 //        Toast.makeText(context, "Date2: " + date, Toast.LENGTH_SHORT).show();
         showtimesRepository = new ShowtimesRepository(context);

@@ -1,17 +1,15 @@
 package com.example.cinemamobilefe.view.activity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,15 +20,19 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.cinemamobilefe.R;
-import com.example.cinemamobilefe.databinding.ActivityMovieDetailsBinding;
 import com.example.cinemamobilefe.databinding.ActivitySeatBinding;
+import com.example.cinemamobilefe.model.SeatModel;
 import com.example.cinemamobilefe.view.adapter.SeatAdapter;
+import com.example.cinemamobilefe.viewmodel.SeatSelectedViewModel;
+import com.example.cinemamobilefe.viewmodel.SeatViewModel;
 
 import java.util.ArrayList;
 
 public class SeatActivity extends AppCompatActivity {
     ActivitySeatBinding binding;
     String id, date, roomName, timeName, id_movie;
+    ArrayList<SeatModel> list = new ArrayList<>();
+    SeatAdapter seatAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +47,11 @@ public class SeatActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getIntentShowtimes();
         binding.rcvSeat.setLayoutManager(new GridLayoutManager(this, 8)); // 9 columns
-
-        ArrayList<String> seatNumbers = generateSeatNumbers();
-        SeatAdapter seatAdapter = new SeatAdapter(seatNumbers, SeatActivity.this);
-        binding.rcvSeat.setAdapter(seatAdapter);
+        ViewModelSeat();
+//
+//        ArrayList<String> seatNumbers = generateSeatNumbers();
+//        SeatAdapter seatAdapter = new SeatAdapter(seatNumbers, SeatActivity.this);
+//        binding.rcvSeat.setAdapter(seatAdapter);
 
         setSupportActionBar(binding.toolbar);
 
@@ -73,19 +76,25 @@ public class SeatActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-    }
-    private ArrayList<String> generateSeatNumbers() {
-        ArrayList<String> seatNumbers = new ArrayList<>();
-        String[] rowLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"};
-
-        for (String rowLetter : rowLetters) {
-            for (int j = 1; j <= 8; j++) { // 9 columns
-                seatNumbers.add(rowLetter + j);
+        binding.btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SeatActivity.this, "Ghế đã đặt: " + seatAdapter.getSelectedSeats(), Toast.LENGTH_SHORT).show();
             }
-        }
-
-        return seatNumbers;
+        });
     }
+//    private ArrayList<String> generateSeatNumbers() {
+//        ArrayList<String> seatNumbers = new ArrayList<>();
+//        String[] rowLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"};
+//
+//        for (String rowLetter : rowLetters) {
+//            for (int j = 1; j <= 8; j++) { // 9 columns
+//                seatNumbers.add(rowLetter + j);
+//            }
+//        }
+//
+//        return seatNumbers;
+//    }
     private void getIntentShowtimes() {
         Bundle bundle = getIntent().getExtras();
         id = bundle.getString("id");
@@ -93,5 +102,31 @@ public class SeatActivity extends AppCompatActivity {
         roomName = bundle.getString("roomName");
         timeName = bundle.getString("timeName");
         id_movie = bundle.getString("id_movie");
+    }
+    private void ViewModelSeat() {
+        SeatViewModel seatViewModel = new SeatViewModel(this);
+        seatViewModel.getLiveData().observe(this, listSeatResponse -> {
+            if (listSeatResponse != null && listSeatResponse.getData() != null) {
+//                Toast.makeText(getContext(), "OKOK", Toast.LENGTH_SHORT).show();
+                list = listSeatResponse.getData();
+//                seatAdapter = new SeatAdapter(listSeatResponse.getData(), SeatActivity.this);
+//                binding.rcvSeat.setAdapter(seatAdapter);
+                ViewModelSeatSelected(id);
+                Log.d(TAG, "ViewModelSeat: " + listSeatResponse.getMessenger());
+                Log.d(TAG, "ViewModelSeat: " + listSeatResponse.getData());
+            }
+        });
+    }
+    private void ViewModelSeatSelected(String id_showtimes) {
+        SeatSelectedViewModel seatSelectedViewModel = new SeatSelectedViewModel(this, id_showtimes);
+        seatSelectedViewModel.getLiveData().observe(this, listSeatResponse -> {
+            if (listSeatResponse != null && listSeatResponse.getData() != null) {
+//                Toast.makeText(getContext(), "OKOK", Toast.LENGTH_SHORT).show();
+                seatAdapter = new SeatAdapter(list, listSeatResponse.getData(),SeatActivity.this);
+                binding.rcvSeat.setAdapter(seatAdapter);
+                Log.d(TAG, "ViewModelSeatSelected: " + listSeatResponse.getMessenger());
+                Log.d(TAG, "ViewModelSeatSelected: " + listSeatResponse.getData());
+            }
+        });
     }
 }

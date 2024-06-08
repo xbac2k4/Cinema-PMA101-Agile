@@ -12,4 +12,7 @@ import retrofit2.http.Query;
 public interface ShowtimesAPI {
     @GET("showtimes/get-showtimes-by-date")
     Call<ShowtimesResponse<ArrayList<ShowtimesModel>>> getShowtimesByDate(@Query(value = "date", encoded = true) String date);
+    @GET("showtimes/get-showtimes-by-movie")
+    Call<ShowtimesResponse<ArrayList<ShowtimesModel>>> getShowtimesByMovie(@Query(value = "id_movie", encoded = true) String movie);
+
 }

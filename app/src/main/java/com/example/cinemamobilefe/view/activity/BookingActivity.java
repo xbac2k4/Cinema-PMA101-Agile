@@ -66,12 +66,12 @@ public class BookingActivity extends AppCompatActivity {
         DateAdapter dateAdapter = new DateAdapter(listDate, this);
         binding.rcvDate.setAdapter(dateAdapter);
         binding.tvDdMmYyyy.setText(newDate);
-        ViewModelShowTimes(newToday);
+        ViewModelShowTimes(newToday, id);
         dateAdapter.setOnClickListen(new OnClickSelectDate() {
             @Override
             public void selectItem(String dayOfWeek, String day, String month, String year) {
                 binding.tvDdMmYyyy.setText(dayOfWeek + ", " + day + " tháng " + month + " năm " + year);
-                ViewModelShowTimes(day + "/" + month + "/" + year);
+                ViewModelShowTimes(day + "/" + month + "/" + year, id);
             }
         });
         // toolbar
@@ -105,20 +105,27 @@ public class BookingActivity extends AppCompatActivity {
             }
         }
     }
-    private void ViewModelShowTimes(String date) {
+    private void ViewModelShowTimes(String date, String id_movie) {
 //        Toast.makeText(this, "ok1", Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this, "Date: " + date, Toast.LENGTH_SHORT).show();
         ShowtimesViewModel showtimesViewModel = new ShowtimesViewModel(this, date);
         showtimesViewModel.getLiveData().observe(BookingActivity.this, listShowtimes -> {
             if (listShowtimes != null && listShowtimes.getData() != null) {
                 // Xử lý dữ liệu showtimesResponse ở đây
-                list = listShowtimes.getData();
-                timeAdapter = new TimeAdapter( listShowtimes.getData(), BookingActivity.this);
+//                list = listShowtimes.getData();
+                ArrayList<ShowtimesModel> newListShowtimes = new ArrayList<>();
+                for (ShowtimesModel showtimes : listShowtimes.getData()) {
+                    if (showtimes.getMovieModel().get_id().toLowerCase().contains(id_movie.toLowerCase())) {
+                        newListShowtimes.add(showtimes);
+//                        Log.d(TAG, "ViewModelShowTimes: " + showtimes.get_id());
+                    }
+                }
+                timeAdapter = new TimeAdapter( newListShowtimes, BookingActivity.this);
                 binding.rcvTime.setAdapter(timeAdapter);
                 timeAdapter.setOnClickListen(new OnClickSelectTime() {
                     @Override
                     public void selectItem(ShowtimesModel showtimesModel) {
-                        Toast.makeText(BookingActivity.this, "Đã chọn lịch chiếu", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(BookingActivity.this, "Đã chọn lịch chiếu", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookingActivity.this, SeatActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("id", showtimesModel.get_id());
@@ -131,7 +138,7 @@ public class BookingActivity extends AppCompatActivity {
                     }
                 });
 //                Toast.makeText(this, "list size: " + list.size(), Toast.LENGTH_SHORT).show();
-                if (list.size() == 0) {
+                if (newListShowtimes.size() == 0) {
                     binding.tvNoScreenings.setVisibility(View.VISIBLE);
                     binding.layoutTenRap.setVisibility(View.INVISIBLE);
                 } else {

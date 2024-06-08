@@ -105,7 +105,7 @@
                 android:layout_width="35dp"
                 android:layout_height="25dp"
                 android:gravity="center"
-                android:text="A1"
+                android:text=""
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:background="@drawable/bgr_seat_booked"
@@ -118,7 +118,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
