@@ -2,6 +2,7 @@ package com.example.cinemamobilefe.viewmodel;
 
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.cinemamobilefe.model.UserModel;
@@ -22,5 +23,12 @@ public class UserViewModel {
 
     public void login(UserModel user) {
         liveData = userRepository.login(user);
+    }
+    public void register(UserModel user) {
+        liveData = userRepository.register(user);
+    }
+//
+    public void updateUserInfo(String id, String username, String phoneNumber, LifecycleOwner lifecycleOwner) {
+        liveData = userRepository.updateUserInfo(id, username, phoneNumber);
     }
 }

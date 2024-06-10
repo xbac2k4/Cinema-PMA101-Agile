@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+        tools:context=".view.activity.RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.LoginActivity"
     android:background="@color/white">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="LOGIN"
+            app:title="REGISTER"
             />
         <ImageView
             android:layout_width="200dp"
@@ -25,7 +27,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your email"
+            android:hint="Enter your username"
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
             app:errorEnabled="true"
@@ -40,9 +42,37 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Enter your email"
+            android:layout_marginHorizontal="20dp"
+            app:errorEnabled="true"
+            app:errorTextColor="#FF0000"
+            app:startIconDrawable="@drawable/ic_email"
+            app:hintAnimationEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your phone"
+            android:layout_marginHorizontal="20dp"
+            app:errorEnabled="true"
+            app:errorTextColor="#FF0000"
+            app:startIconDrawable="@drawable/ic_phone"
+            app:hintAnimationEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Enter your password"
             app:errorEnabled="true"
-            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
             app:startIconDrawable="@drawable/ic_lock_24"
             app:endIconMode="password_toggle"
@@ -53,15 +83,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confim your password"
+            app:errorEnabled="true"
+            android:layout_marginHorizontal="20dp"
+            app:startIconDrawable="@drawable/ic_lock_24"
+            app:endIconMode="password_toggle"
+            app:hintAnimationEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_cfpassword"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/bgr_btn_login"
-            android:text="LOGIN"
-          />
+            android:text="REGISTER"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -72,15 +118,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You do not have an account?"
+                android:text="You have an account?"
                 android:textSize="14sp"
                 android:textColor="#FE9D00"
                 android:fontFamily="sans-serif"/>
             <TextView
-                android:id="@+id/tv_register"
+                android:id="@+id/tv_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Register now!"
+                android:text=" Login now!"
                 android:textSize="16sp"
                 android:textColor="#0022FE"
                 android:fontFamily="sans-serif-black"

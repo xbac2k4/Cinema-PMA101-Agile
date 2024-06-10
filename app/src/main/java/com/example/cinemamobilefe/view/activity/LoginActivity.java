@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cinemamobilefe.Data_local.DataLocalManager;
+import com.example.cinemamobilefe.Dialog.LoadingDialog;
 import com.example.cinemamobilefe.databinding.ActivityLoginBinding;
 import com.example.cinemamobilefe.model.UserModel;
 import com.example.cinemamobilefe.service.repository.UserRepository;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     UserRepository userRepository;
     UserModel userModel;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,23 +31,41 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        userRepository = new UserRepository(this);
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
+        String password = intent.getStringExtra("password");
 
+        if (email != null) {
+            binding.edtUsername.setText(email);
+        }
+        if (password != null) {
+            binding.edtPassword.setText(password);
+        }
+
+        userRepository = new UserRepository(this);
         binding.btnLogin.setOnClickListener(v -> onClickLogin());
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("LOGIN");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        loadingDialog = new LoadingDialog(this);
+        binding.tvRegister.setOnClickListener(v-> onClickRegister());
+    }
+    private void onClickRegister(){
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void onClickLogin() {
         String username = binding.edtUsername.getText().toString().trim();
         String password = binding.edtPassword.getText().toString().trim();
+        loadingDialog.show();
 
         if (!username.isEmpty() && !password.isEmpty()) {
             UserModel user = new UserModel();
@@ -65,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         } else {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin đăng nhập", Toast.LENGTH_SHORT).show();
+            loadingDialog.cancel();
         }
     }
 
@@ -82,5 +103,6 @@ public class LoginActivity extends AppCompatActivity {
     private void handleLoginFailure() {
         Log.e("LoginActivity", "Đăng nhập thất bại");
         Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+        loadingDialog.cancel();
     }
 }
