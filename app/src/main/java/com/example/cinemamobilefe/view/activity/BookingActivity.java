@@ -18,9 +18,11 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.cinemamobilefe.Data_local.DataIntentManager;
 import com.example.cinemamobilefe.R;
 import com.example.cinemamobilefe.databinding.ActivityBookingBinding;
 import com.example.cinemamobilefe.databinding.ActivityLoginBinding;
+import com.example.cinemamobilefe.model.MovieModel;
 import com.example.cinemamobilefe.model.ShowtimesModel;
 import com.example.cinemamobilefe.model.TimeModel;
 import com.example.cinemamobilefe.service.onClick.OnClickSelectDate;
@@ -47,6 +49,7 @@ public class BookingActivity extends AppCompatActivity {
     String id, image, name, start_date, duration, description, directors, name_category;
     ArrayList<ShowtimesModel> list = new ArrayList<>();
     TimeAdapter timeAdapter;
+    MovieModel movieModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +69,20 @@ public class BookingActivity extends AppCompatActivity {
         DateAdapter dateAdapter = new DateAdapter(listDate, this);
         binding.rcvDate.setAdapter(dateAdapter);
         binding.tvDdMmYyyy.setText(newDate);
-        ViewModelShowTimes(newToday, id);
+        ViewModelShowTimes(newToday, movieModel.get_id());
         dateAdapter.setOnClickListen(new OnClickSelectDate() {
             @Override
             public void selectItem(String dayOfWeek, String day, String month, String year) {
-                binding.tvDdMmYyyy.setText(dayOfWeek + ", " + day + " tháng " + month + " năm " + year);
-                ViewModelShowTimes(day + "/" + month + "/" + year, id);
+                newDate = dayOfWeek + ", " + day + " tháng " + month + " năm " + year;
+                binding.tvDdMmYyyy.setText(newDate);
+                ViewModelShowTimes(day + "/" + month + "/" + year, movieModel.get_id());
             }
         });
         // toolbar
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setTitle(movieModel.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back_24_black);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,13 +132,15 @@ public class BookingActivity extends AppCompatActivity {
                     public void selectItem(ShowtimesModel showtimesModel) {
 //                        Toast.makeText(BookingActivity.this, "Đã chọn lịch chiếu", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookingActivity.this, SeatActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("id", showtimesModel.get_id());
-                        bundle.putString("date", showtimesModel.getDate());
-                        bundle.putString("roomName", showtimesModel.getRoomModel().getRoomName());
-                        bundle.putString("timeName", showtimesModel.getTimeModel().getTimeName());
-                        bundle.putString("id_movie", showtimesModel.getMovieModel().get_id());
-                        intent.putExtras(bundle);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("id", showtimesModel.get_id());
+//                        bundle.putString("date", showtimesModel.getDate());
+//                        bundle.putString("roomName", showtimesModel.getRoomModel().getRoomName());
+//                        bundle.putString("timeName", showtimesModel.getTimeModel().getTimeName());
+//                        bundle.putString("id_movie", showtimesModel.getMovieModel().get_id());
+//                        intent.putExtras(bundle);
+                        intent.putExtra(DataIntentManager.DATA_INTENT_SHOWTIMES, DataIntentManager.setShowtimes(showtimesModel));
+                        intent.putExtra("date", newDate);
                         startActivity(intent);
                     }
                 });
@@ -155,14 +162,16 @@ public class BookingActivity extends AppCompatActivity {
         });
     }
     private void getIntentMovie() {
-        Bundle bundle = getIntent().getExtras();
-        id = bundle.getString("id");
-        image = bundle.getString("image");
-        name = bundle.getString("name");
-        start_date = bundle.getString("start_date");
-        duration = bundle.getString("duration");
-        description = bundle.getString("description");
-        directors = bundle.getString("directors");
-        name_category = bundle.getString("name_category");
+//        Bundle bundle = getIntent().getExtras();
+//        id = bundle.getString("id");
+//        image = bundle.getString("image");
+//        name = bundle.getString("name");
+//        start_date = bundle.getString("start_date");
+//        duration = bundle.getString("duration");
+//        description = bundle.getString("description");
+//        directors = bundle.getString("directors");
+//        name_category = bundle.getString("name_category");
+        String object_movie = getIntent().getStringExtra(DataIntentManager.DATA_INTENT_MOVIE);
+        movieModel = DataIntentManager.getMovie(object_movie);
     }
 }

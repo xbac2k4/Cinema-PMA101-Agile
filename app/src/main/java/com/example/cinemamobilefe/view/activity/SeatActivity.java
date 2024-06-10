@@ -2,6 +2,7 @@ package com.example.cinemamobilefe.view.activity;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -19,9 +20,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.cinemamobilefe.Data_local.DataIntentManager;
 import com.example.cinemamobilefe.R;
 import com.example.cinemamobilefe.databinding.ActivitySeatBinding;
 import com.example.cinemamobilefe.model.SeatModel;
+import com.example.cinemamobilefe.model.ShowtimesModel;
 import com.example.cinemamobilefe.view.adapter.SeatAdapter;
 import com.example.cinemamobilefe.viewmodel.SeatSelectedViewModel;
 import com.example.cinemamobilefe.viewmodel.SeatViewModel;
@@ -30,9 +33,10 @@ import java.util.ArrayList;
 
 public class SeatActivity extends AppCompatActivity {
     ActivitySeatBinding binding;
-    String id, date, roomName, timeName, id_movie;
+//    String id, date, roomName, timeName, id_movie;
     ArrayList<SeatModel> list = new ArrayList<>();
     SeatAdapter seatAdapter;
+    ShowtimesModel showtimesModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +65,7 @@ public class SeatActivity extends AppCompatActivity {
         title.setSpan(new StyleSpan(Typeface.BOLD), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // Bold
 
         // Set custom subtitle size
-        SpannableString subtitle = new SpannableString(roomName + "  " + date + " " + timeName);
+        SpannableString subtitle = new SpannableString(showtimesModel.getRoomModel().getRoomName() + "  " + showtimesModel.getDate() + " " + showtimesModel.getTimeModel().getTimeName());
         subtitle.setSpan(new AbsoluteSizeSpan(14, true), 0, subtitle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 16sp
 
         getSupportActionBar().setTitle(title);
@@ -70,6 +74,7 @@ public class SeatActivity extends AppCompatActivity {
 //        getSupportActionBar().setTitle("CINEMA Nhóm 5 Agile");
 //        getSupportActionBar().setSubtitle(roomName + "  " + date + " " + timeName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back_24_black);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +84,18 @@ public class SeatActivity extends AppCompatActivity {
         binding.btnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SeatActivity.this, "Ghế đã đặt: " + seatAdapter.getSelectedSeats(), Toast.LENGTH_SHORT).show();
+                if (seatAdapter.getSelectedSeats().size() > 0) {
+                    String date = getIntent().getStringExtra("date");
+//                Toast.makeText(SeatActivity.this, "Ghế đã đặt: " + seatAdapter.getSelectedSeats(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SeatActivity.this, PaymentActivity.class);
+                    intent.putExtra(DataIntentManager.DATA_INTENT_SEAT_SELECTED, DataIntentManager.setListSeatSelected(seatAdapter.getSelectedSeats()));
+                    intent.putExtra(DataIntentManager.DATA_INTENT_SHOWTIMES, DataIntentManager.setShowtimes(showtimesModel));
+                    intent.putExtra("date", date);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(SeatActivity.this, "Please choose at least 1 seat", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -96,12 +112,14 @@ public class SeatActivity extends AppCompatActivity {
 //        return seatNumbers;
 //    }
     private void getIntentShowtimes() {
-        Bundle bundle = getIntent().getExtras();
-        id = bundle.getString("id");
-        date = bundle.getString("date");
-        roomName = bundle.getString("roomName");
-        timeName = bundle.getString("timeName");
-        id_movie = bundle.getString("id_movie");
+//        Bundle bundle = getIntent().getExtras();
+//        id = bundle.getString("id");
+//        date = bundle.getString("date");
+//        roomName = bundle.getString("roomName");
+//        timeName = bundle.getString("timeName");
+//        id_movie = bundle.getString("id_movie");
+        String object_showtimes = getIntent().getStringExtra(DataIntentManager.DATA_INTENT_SHOWTIMES);
+        showtimesModel = DataIntentManager.getShowtimes(object_showtimes);
     }
     private void ViewModelSeat() {
         SeatViewModel seatViewModel = new SeatViewModel(this);
@@ -111,7 +129,7 @@ public class SeatActivity extends AppCompatActivity {
                 list = listSeatResponse.getData();
 //                seatAdapter = new SeatAdapter(listSeatResponse.getData(), SeatActivity.this);
 //                binding.rcvSeat.setAdapter(seatAdapter);
-                ViewModelSeatSelected(id);
+                ViewModelSeatSelected(showtimesModel.get_id());
                 Log.d(TAG, "ViewModelSeat: " + listSeatResponse.getMessenger());
                 Log.d(TAG, "ViewModelSeat: " + listSeatResponse.getData());
             }

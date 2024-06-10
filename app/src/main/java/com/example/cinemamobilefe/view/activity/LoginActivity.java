@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cinemamobilefe.Data_local.DataLocalManager;
+import com.example.cinemamobilefe.R;
 import com.example.cinemamobilefe.databinding.ActivityLoginBinding;
 import com.example.cinemamobilefe.model.UserModel;
 import com.example.cinemamobilefe.service.repository.UserRepository;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("LOGIN");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back_24_black);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,7 +5,7 @@
     android:padding="10dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:background="@drawable/bgr_ticket"
         android:backgroundTint="#FDEEDF"
         android:paddingHorizontal="35dp"
@@ -39,12 +39,23 @@
                 android:ellipsize="end"
                 android:text="08 tháng 03, 2024  07:00 AM"/>
             <TextView
+                android:id="@+id/tv_room_seat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_date_time"
+                android:maxLines="1"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:text="P1 - G4"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:textSize="12sp"
                 android:textStyle="italic"
-                android:layout_below="@+id/tv_date_time"
+                android:layout_below="@+id/tv_room_seat"
                 android:text="CINEMA Nhóm 5 Agile"/>
             <TextView
                 android:id="@+id/tv_price"
@@ -65,6 +76,7 @@
                 android:layout_height="25dp"
                 android:layout_alignParentBottom="true">
                 <TextView
+                    android:id="@+id/tv_id_ticket_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="12sp"

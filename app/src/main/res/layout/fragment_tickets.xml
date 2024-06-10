@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".view.fragment.FragmentTickets">
-    <androidx.recyclerview.widget.RecyclerView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_ticket"/>
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:tabTextColor="#80000000"
+        app:tabSelectedTextColor="#ff9e00"
+        app:tabIndicatorColor="#ff9e00">
+    </com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPage2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
