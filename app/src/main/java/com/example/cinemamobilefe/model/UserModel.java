@@ -1,7 +1,20 @@
 package com.example.cinemamobilefe.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserModel {
-    private String _id, username, password, email, avatar, phonenumber;
+    @SerializedName("password")
+    private String password;
+    @SerializedName("email")
+    private String email;
+    @SerializedName("avatar")
+    private String avatar;
+    @SerializedName("phoneNumber")
+    private String  phoneNumber;
+    @SerializedName("_id")
+    private String _id;
+    @SerializedName("username")
+    private String  username;
     private int sex, role;
 
     public UserModel() {
@@ -47,12 +60,12 @@ public class UserModel {
         this.avatar = avatar;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getSex() {
