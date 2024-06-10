@@ -26,6 +26,9 @@
         <activity
             android:name=".view.activity.RegisterActivity"
             android:exported="false" />
+      <activity
+            android:name=".view.activity.PaymentActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activity.SeatActivity"
             android:exported="false" />

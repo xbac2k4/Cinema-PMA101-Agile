@@ -8,30 +8,33 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         tools:context=".view.activity.MovieDetails">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/black"
+            app:title="Movie Details"
+            android:background="#00FFFFFF"/>
         <ImageView
             android:id="@+id/img_banner"
             android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
             android:layout_height="320dp"
             android:background="#616161"
             android:alpha="0.8"
             android:scaleType="centerCrop"/>
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bgr_back"
-            android:padding="10dp"
-            android:layout_margin="15dp"
-            android:src="@drawable/ic_back_24"/>
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/tool_bar"-->
-<!--            android:layout_width="match_parent"-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/btn_back"-->
+<!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            app:titleTextColor="@color/white"/>-->
+<!--            android:background="@drawable/bgr_back"-->
+<!--            android:padding="10dp"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:src="@drawable/ic_back_24"/>-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="100dp">
+            android:paddingTop="165dp">
             <RelativeLayout
                 android:id="@+id/layout_image_name"
                 android:layout_width="match_parent"

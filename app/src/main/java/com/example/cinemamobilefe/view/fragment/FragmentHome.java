@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.cinemamobilefe.Data_local.DataIntentManager;
 import com.example.cinemamobilefe.service.onClick.OnClickSelectCategory;
 import com.example.cinemamobilefe.service.onClick.OnClickSelectMovie;
 import com.example.cinemamobilefe.databinding.FragmentHomeBinding;
@@ -37,6 +38,7 @@ import com.example.cinemamobilefe.view.adapter.CategoryAdapter;
 import com.example.cinemamobilefe.view.adapter.MovieApdapter;
 import com.example.cinemamobilefe.viewmodel.CategoryViewModel;
 import com.example.cinemamobilefe.viewmodel.MovieViewModel;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,7 @@ public class FragmentHome extends Fragment {
     ArrayList<SlideModel> imageList = new ArrayList<>();
     MovieApdapter apdapterMovie;
     ArrayList<MovieModel> listGetImage = new ArrayList<>();
+
     CategoryAdapter adapterCategory;
     public FragmentHome() {
         // Required empty public constructor
@@ -61,12 +64,12 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageSlider();
+        ImageSlide();
 //        ViewModelCategory();
         ViewModelMovie();
     }
 
-    private void ImageSlider() {
+    private void ImageSlide() {
         imageList.add(new SlideModel("https://i.ytimg.com/vi/fVWlCV9_n7w/maxresdefault.jpg", "The animal population decreased by 58 percent in 42 years.", ScaleTypes.CENTER_CROP));
         imageList.add(new SlideModel("https://i.ytimg.com/vi/2K8EpM-piDw/maxresdefault.jpg", "Elephants and tigers may become extinct.", ScaleTypes.CENTER_CROP));
         imageList.add(new SlideModel("https://i.ytimg.com/vi/Gah3ahVcCWQ/maxresdefault.jpg", "And people do that.", ScaleTypes.CENTER_CROP));
@@ -79,16 +82,18 @@ public class FragmentHome extends Fragment {
             @Override
             public void selectItem(MovieModel movieModel) {
                 Intent intent = new Intent(getContext(), MovieDetails.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", movieModel.get_id());
-                bundle.putString("image", movieModel.getImage());
-                bundle.putString("name", movieModel.getName());
-                bundle.putString("start_date", movieModel.getStart_date());
-                bundle.putString("duration", movieModel.getDuration());
-                bundle.putString("description", movieModel.getDescription());
-                bundle.putString("directors", movieModel.getDirectors());
-                bundle.putString("name_category", movieModel.getId_category().getName());
-                intent.putExtras(bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("id", movieModel.get_id());
+//                bundle.putString("image", movieModel.getImage());
+//                bundle.putString("name", movieModel.getName());
+//                bundle.putString("start_date", movieModel.getStart_date());
+//                bundle.putString("duration", movieModel.getDuration());
+//                bundle.putString("description", movieModel.getDescription());
+//                bundle.putString("directors", movieModel.getDirectors());
+//                bundle.putString("name_category", movieModel.getId_category().getName());
+//                Toast.makeText(getContext(), "Gson: " + strJsonMovie, Toast.LENGTH_SHORT).show();
+//                intent.putExtras(bundle);
+                intent.putExtra(DataIntentManager.DATA_INTENT_MOVIE, DataIntentManager.setMovie(movieModel));
                 startActivity(intent);
             }
         });

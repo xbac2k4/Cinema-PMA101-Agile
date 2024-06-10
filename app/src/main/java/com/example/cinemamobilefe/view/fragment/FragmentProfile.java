@@ -92,6 +92,7 @@ public class FragmentProfile extends Fragment {
         UserModel userModel = DataLocalManager.getUser();
         binding.tvUsername.setText(userModel.getUsername());
         updateUI(userModel);
+
     }
 
     private void updateUI(UserModel user) {
@@ -135,6 +136,7 @@ public class FragmentProfile extends Fragment {
     private void logoutClicked() {
         // Perform the steps to log out the user and redirect them to the login screen
         Intent intent = new Intent(requireActivity(), LoginActivity.class);
+        DataLocalManager.removeUser();
         startActivity(intent);
         requireActivity().finish(); // Close FragmentProfile to prevent the user from going back
     }
