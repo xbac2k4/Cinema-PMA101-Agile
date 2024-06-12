@@ -44,14 +44,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bgr_line_2">
+            android:layout_marginTop="30dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:visibility="visible"
-                android:paddingHorizontal="10dp"
-                android:background="@drawable/bgr_line">
+                android:paddingHorizontal="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -81,21 +79,22 @@
                         android:textSize="16sp" />
                 </LinearLayout>
             </RelativeLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/line"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bgr_line_2"
-            >
+            android:layout_marginTop="10dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:visibility="visible"
                 android:paddingHorizontal="10dp"
-                android:gravity="center"
-                android:background="@drawable/bgr_line">
+                android:gravity="center">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,21 +123,22 @@
                         />
                 </LinearLayout>
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/line"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bgr_line_2"
-
-            >
+            android:layout_marginTop="10dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:visibility="visible"
                 android:paddingHorizontal="10dp"
-                android:gravity="center"
-                android:background="@drawable/bgr_line">
+                android:gravity="center">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -168,6 +168,11 @@
                         />
                 </LinearLayout>
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/line"/>
         </RelativeLayout>
         <Button
             android:id="@+id/btn_ok"

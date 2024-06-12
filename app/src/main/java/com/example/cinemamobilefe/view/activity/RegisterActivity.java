@@ -76,17 +76,24 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setPhoneNumber(phone);
 
                 userRepository.register(user).observe(this, userModelUserResponse ->  {
-                    if (userModelUserResponse != null && userModelUserResponse.getData() != null) {
+                    if (userModelUserResponse != null ) {
                         if (userModelUserResponse.getStatus() == 200) {
                             handleLoginSuccess(userModelUserResponse.getData());
+                        } else if (userModelUserResponse.getStatus() == -2) {
+                            Toast.makeText(this, userModelUserResponse.getMessenger(), Toast.LENGTH_SHORT).show();
                         } else {
                             handleLoginFailure();
                         }
-                    } else {
-                        handleLoginFailure();
                     }
+//                    if (userModelUserResponse != null && userModelUserResponse.getData() != null) {
+//                        Toast.makeText(this, "" + userModelUserResponse.getStatus(), Toast.LENGTH_SHORT).show();
+//
+//                    } else {
+//                        Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+//                        handleLoginFailure();
+//                    }
                 });
-            }else {
+            } else {
                 Toast.makeText(this, "Mật khẩu xác nhận lại không trùng khớp", Toast.LENGTH_SHORT).show();
             }
 
@@ -97,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void handleLoginSuccess(UserModel userModel) {
-        Log.d("RegisterActivity", "Đăng ký thành công, đăng nhập lại để tiếp tục");
+//        Log.d("RegisterActivity", "Đăng ký thành công, đăng nhập lại để tiếp tục");
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         intent.putExtra("email", userModel.getEmail());
         intent.putExtra("password", userModel.getPassword());
