@@ -1,10 +1,13 @@
 package com.example.cinemamobilefe.service.repository;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -25,6 +28,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Part;
 
 public class UserRepository {
     private Context context;
@@ -158,22 +162,23 @@ public class UserRepository {
         return mutableLiveData;
     }
 
-    public LiveData<UserResponse> updateAvatar(String userId, MultipartBody.Part avatar) {
-        MutableLiveData<UserResponse> data = new MutableLiveData<>();
+    public LiveData<UserResponse<UserModel>> updateAvatar(UserModel userModel, MultipartBody.Part multipartBody) {
+        MutableLiveData<UserResponse<UserModel>> data = new MutableLiveData<>();
 
         UserAPI userAPI = RetrofitInstance.getRetrofitInstance().create(UserAPI.class);
-        userAPI.updateAvatar(userId, avatar).enqueue(new Callback<UserResponse>() {
+        userAPI.updateAvatar(userModel.getId(), multipartBody).enqueue(new Callback<UserResponse<UserModel>>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<UserResponse<UserModel>> call, Response<UserResponse<UserModel>> response) {
                 if (response.isSuccessful()) {
                     data.setValue(response.body());
+                    Log.d(TAG, "update anh: " + response.body());
                 } else {
                     data.setValue(null);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<UserResponse<UserModel>> call, Throwable t) {
                 data.setValue(null);
             }
         });

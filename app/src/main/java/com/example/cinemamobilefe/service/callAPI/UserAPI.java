@@ -35,9 +35,7 @@ public interface UserAPI {
     Call<UserResponse<UserModel>> updateUserInfo(@Path("id") String id, @Body Map<String, String> userInfoData);
 
     @Multipart
-    @PUT("users/update-avatar/{id}")
-    Call<UserResponse> updateAvatar(@Path("id") String userId, @Part MultipartBody.Part avatar);
-
-
+    @PUT("user/update-avatar/{id}")
+    Call<UserResponse<UserModel>> updateAvatar(@Path("id") String userId, @Part MultipartBody.Part avatar);
 
 }
