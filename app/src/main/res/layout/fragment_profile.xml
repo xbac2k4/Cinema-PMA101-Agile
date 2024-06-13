@@ -50,16 +50,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bgr_line_2">
-
+            android:layout_marginTop="30dp">
             <RelativeLayout
                 android:id="@+id/layout_tt_taikhoan"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:visibility="visible"
-                android:padding="12dp"
-                android:background="@drawable/bgr_line">
+                android:padding="12dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,20 +74,23 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/line"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bgr_line_2">
+            android:layout_marginTop="10dp">
             <RelativeLayout
                 android:id="@+id/layout_doi_mk"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:visibility="visible"
-                android:padding="12dp"
-                android:background="@drawable/bgr_line">
+                android:padding="12dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -108,20 +108,23 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/line"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bgr_line_2">
+            android:layout_marginTop="10dp">
             <RelativeLayout
                 android:id="@+id/layout_dangxuat"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:visibility="visible"
-                android:padding="12dp"
-                android:background="@drawable/bgr_line">
+                android:padding="12dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,6 +136,11 @@
                     android:textSize="18sp"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/line"/>
         </RelativeLayout>
     </LinearLayout>
 </layout>
