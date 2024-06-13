@@ -158,34 +158,27 @@ public class UserRepository {
         return mutableLiveData;
     }
 
-    public LiveData<UserResponse<UserModel>> updateAvatar(String id, String avatarUrl) {
-        final MutableLiveData<UserResponse<UserModel>> mutableLiveData = new MutableLiveData<>();
+    public LiveData<UserResponse> updateAvatar(String userId, MultipartBody.Part avatar) {
+        MutableLiveData<UserResponse> data = new MutableLiveData<>();
 
         UserAPI userAPI = RetrofitInstance.getRetrofitInstance().create(UserAPI.class);
-
-        userAPI.updateAvatar(id, avatarUrl).enqueue(new Callback<UserResponse<UserModel>>() {
+        userAPI.updateAvatar(userId, avatar).enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse<UserModel>> call, Response<UserResponse<UserModel>> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
-                    mutableLiveData.postValue(response.body());
+                    data.setValue(response.body());
                 } else {
-                    mutableLiveData.postValue(null);
-                    try {
-                        Log.e("UserRepository", "Response error body: " + response.errorBody().string());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    data.setValue(null);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserResponse<UserModel>> call, Throwable t) {
-                mutableLiveData.postValue(null);
-                Log.e("UserRepository", "Update avatar request failed", t);
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                data.setValue(null);
             }
         });
-
-        return mutableLiveData;
+        return data;
     }
+
 
 }

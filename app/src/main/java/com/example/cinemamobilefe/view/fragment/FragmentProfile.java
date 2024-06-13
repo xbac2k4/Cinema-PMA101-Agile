@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class FragmentProfile extends Fragment {
@@ -71,15 +72,13 @@ public class FragmentProfile extends Fragment {
                 result -> {
                     if (result.getResultCode() == AppCompatActivity.RESULT_OK && result.getData() != null) {
                         tempSelectedImageUri = result.getData().getData();
-                        // Lấy đối tượng File đại diện cho hình ảnh đã chọn
-                        File imageFile = createFileFormUri(tempSelectedImageUri, "image");
+                        // Tạo MultipartBody.Part từ Uri đã chọn
+                        MultipartBody.Part imagePart = createMultipartBodyPartFromUri(tempSelectedImageUri, "image");
                         // Gọi phương thức uploadAvatar để tải lên hình ảnh
-                        uploadAvatar(imageFile, DataLocalManager.getUser());
+                        uploadAvatar(imagePart, DataLocalManager.getUser());
                     }
                 }
         );
-
-
         // Handle click event on imgAvt to choose image
 
         binding.imgAvt.setOnClickListener(v -> chooseImage());
@@ -257,31 +256,28 @@ public class FragmentProfile extends Fragment {
     }
 
     // Method to choose image and upload avatar
+    // Phương thức chọn ảnh và tải lên avatar
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         getImageLauncher.launch(intent);
     }
-    private void uploadAvatar(File imageFile, UserModel userModel) {
-        if (imageFile != null && imageFile.exists()) {
-            // Đường dẫn URL của ảnh
-            String avatarUrl = String.valueOf(tempSelectedImageUri); // Thay thế bằng đường dẫn URL thực tế của ảnh
 
-            // Tạo RequestBody từ avatarUrl
-            RequestBody avatarUrlRequestBody = RequestBody.create(MediaType.parse("text/plain"), avatarUrl);
-
+    private void uploadAvatar(MultipartBody.Part imagePart, UserModel userModel) {
+        if (imagePart != null) {
             // Gửi yêu cầu cập nhật avatar
             UserRepository userRepository = new UserRepository(requireContext());
-            userRepository.updateAvatar(userModel.getId(), avatarUrlRequestBody.toString()).observe(getViewLifecycleOwner(), userResponse -> {
+            userRepository.updateAvatar(userModel.getId(), imagePart).observe(getViewLifecycleOwner(), userResponse -> {
                 if (userResponse != null && userResponse.getStatus() == 200) {
                     // Cập nhật thông tin đường dẫn ảnh mới trong đối tượng UserModel
-                    userModel.setAvatar(userResponse.getData().getAvatar());
+                    String newAvatarUrl = userResponse.getData().toString(); // Giả sử phương thức trả về đường dẫn ảnh mới là getAvatarUrl()
+                    userModel.setAvatar(newAvatarUrl);
                     DataLocalManager.setUser(userModel);
 
                     // Cập nhật ảnh trên ImageView sau khi tải lên thành công
                     Glide.with(requireContext())
-                            .load(userResponse.getData().getAvatar()) // Sử dụng đường dẫn ảnh mới từ API
+                            .load(newAvatarUrl) // Sử dụng đường dẫn ảnh mới từ API
                             .centerCrop()
                             .error(R.drawable.ic_avt_df)
                             .into(binding.imgAvt);
@@ -293,13 +289,11 @@ public class FragmentProfile extends Fragment {
             Toast.makeText(requireContext(), "Không có đường dẫn ảnh được chọn", Toast.LENGTH_SHORT).show();
         }
     }
-    private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = getActivity().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-    private File createFileFormUri(Uri uri, String name) {
-        File file = new File(getActivity().getCacheDir(), name + getFileExtension(uri));
+
+
+    @Nullable
+    private MultipartBody.Part createMultipartBodyPartFromUri(Uri uri, String name) {
+        File file = new File(getActivity().getCacheDir(), name + "." + getFileExtension(uri));
         InputStream inputStream = null;
         OutputStream outputStream = null;
 
@@ -311,7 +305,9 @@ public class FragmentProfile extends Fragment {
             while ((length = inputStream.read(buffer)) > 0) {
                 outputStream.write(buffer, 0, length);
             }
-            return file;
+            // Tạo MultipartBody.Part từ file
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+            return MultipartBody.Part.createFormData("avatar", file.getName(), requestFile);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -327,6 +323,12 @@ public class FragmentProfile extends Fragment {
             }
         }
         return null;
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
 }

@@ -34,9 +34,10 @@ public interface UserAPI {
     @PUT("user/update-info/{id}")
     Call<UserResponse<UserModel>> updateUserInfo(@Path("id") String id, @Body Map<String, String> userInfoData);
 
-    @PUT("user/update-avatar/{id}")
-    @FormUrlEncoded
-    Call<UserResponse<UserModel>> updateAvatar(@Path("id") String id, @Field("avatar") String avatarUrl);
+    @Multipart
+    @PUT("users/update-avatar/{id}")
+    Call<UserResponse> updateAvatar(@Path("id") String userId, @Part MultipartBody.Part avatar);
+
 
 
 }
