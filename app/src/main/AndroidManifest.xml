@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:name=".view.MyAppLication"
         android:allowBackup="true"
@@ -15,10 +16,17 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.CinemaMobileFE"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.activity.ImagePickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.RegisterActivity"
+            android:exported="false" />
+      <activity
             android:name=".view.activity.PaymentActivity"
             android:exported="false" />
         <activity

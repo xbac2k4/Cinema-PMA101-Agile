@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".view.activity.LoginActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your username"
+                    android:hint="Enter your Email"
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="20dp"
                     app:errorEnabled="true"
