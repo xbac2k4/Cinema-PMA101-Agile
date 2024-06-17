@@ -152,19 +152,18 @@
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="5dp"/>
-                    <EditText
+                    <TextView
                         android:id="@+id/edt_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Phone"
                         android:textColor="@color/black"
-                        android:drawableRight="@drawable/ic_edit"
-                        android:drawablePadding="5dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="right"
                         android:textSize="16sp"
+                        android:paddingRight="15dp"
                         />
                 </LinearLayout>
             </RelativeLayout>

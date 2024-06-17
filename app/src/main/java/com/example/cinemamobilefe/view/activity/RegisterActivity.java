@@ -55,17 +55,17 @@ public class RegisterActivity extends AppCompatActivity {
             if (password.equals(cfpassword)){
 
                 if (password.length() < 8) {
-                    Toast.makeText(this, "Mật khẩu phải ít nhất 8 ký tự", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // Kiểm tra định dạng email
                 if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-                    Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // Kiểm tra định dạng số điện thoại
                 if (!phone.matches("^(\\+|0)[0-9]{9,11}$")) {
-                    Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

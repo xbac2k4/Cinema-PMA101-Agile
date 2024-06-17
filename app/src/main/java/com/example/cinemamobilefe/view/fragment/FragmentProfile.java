@@ -131,8 +131,8 @@ public class FragmentProfile extends Fragment {
     // Method to display logout confirmation dialog
     private void showLogoutConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Xác nhận")
-                .setMessage("Bạn có chắc chắn muốn thoát?")
+        builder.setTitle("Confirm")
+                .setMessage("Do you sure you want to exit?")
                 .setPositiveButton("Yes", (dialog, id) -> logoutClicked())
                 .setNegativeButton("No", (dialog, id) -> {
                     // Do nothing, dialog will close automatically when clicking No
@@ -191,16 +191,12 @@ public class FragmentProfile extends Fragment {
                 return;
             }
             // Validate số điện thoại
-            if (!phoneNumber.matches("^(\\+|0)[0-9]{9,11}$")) {
-                Toast.makeText(getContext(), "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
-                return;
-            }
 
             UserRepository userRepository = new UserRepository(getContext());
             userRepository.updateUserInfo(userModel.getId(), username, phoneNumber).observe(getViewLifecycleOwner(), userResponse -> {
                 if (userResponse != null && userResponse.getStatus() == 200) {
                     if (hasChanged.get()) {
-                        Toast.makeText(getContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Successfully updated", Toast.LENGTH_SHORT).show();
                     }
                     userModel.setUsername(username);
                     userModel.setPhoneNumber(phoneNumber);

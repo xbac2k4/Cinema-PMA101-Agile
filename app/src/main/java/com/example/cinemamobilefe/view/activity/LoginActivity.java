@@ -86,13 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin đăng nhập", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter complete login information", Toast.LENGTH_SHORT).show();
             loadingDialog.cancel();
         }
     }
 
     private void handleLoginSuccess(UserModel userModel) {
-        Log.d("LoginActivity", "Đăng nhập thành công");
+        Log.d("LoginActivity", "Logged in successfully");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("auth", "hhh");
 
